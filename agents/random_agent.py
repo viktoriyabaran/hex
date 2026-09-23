@@ -1,6 +1,6 @@
 import random
 
-from agent import IAgent
+from .agent import IAgent
 
 from game import HexGame
 
