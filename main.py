@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from agents.alpha_beta_agent import AlphaBetaAgent
+from agents.monte_carlo_tree_search_agent import MCTSAgent
 from controller import Controller
 from game import HexGame
 from ui import HexUI
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     root.title("Hex")
 
     game = HexGame(BOARD_SIZE)
-    controller = Controller(game, {1: AlphaBetaAgent(3), -1: AlphaBetaAgent(4)})
+    controller = Controller(game, {1: MCTSAgent(), -1: MCTSAgent()})
     ui = HexUI(root, controller, BOARD_SIZE)
     controller.view = ui
 
