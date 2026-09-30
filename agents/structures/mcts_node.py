@@ -1,6 +1,8 @@
 import math
 import random
 
+from game import HexGame
+
 
 class Node:
     def __init__(self, game, move=None, parent=None):
@@ -38,19 +40,19 @@ class Node:
         return max(self.children, key=ucb)
 
     def rollout(self):
-        simulation = self.game.copy()
+        board = [row[:] for row in self.game.board]
+        if self.game.winner != 0:
+            return self.game.winner
 
-        while True:
-            winner = simulation.winner
-            if winner != 0:
-                return winner
-            
-            moves = simulation.legal_moves()
-            if not moves:
-                return None
-            
-            move = random.choice(moves)
-            simulation.play(*move)
+        empty = [(r, c) for r in range(len(board)) for c in range(len(board)) if board[r][c] == 0]
+        random.shuffle(empty)
+        player = self.game.current_player
+        for r, c in empty:
+            board[r][c] = player
+            player = -player
+
+        sim = HexGame(len(board), board)
+        return 1 if sim.check_winner(1) else -1
 
     def backpropagate(self, winner):
         self.visits += 1
