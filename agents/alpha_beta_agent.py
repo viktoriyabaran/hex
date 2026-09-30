@@ -48,7 +48,7 @@ class AlphaBetaAgent:
             simulation = game.copy()
             simulation.play(*move)
 
-            score = minimax(simulation, 2, game.current_player, best_score, INF)
+            score = minimax(simulation, self.depth, game.current_player, best_score, INF)
 
             if score > best_score:
                 best_score = score
