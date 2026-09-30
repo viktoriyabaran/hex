@@ -5,6 +5,7 @@ from game import HexGame, neighbors
 
 INF = float("inf")
 
+# really the same logic with 0/1 BFS (shortest path agent) - just different ways to find the path
 
 def distance_to_connect(game: HexGame, player: int) -> float:
     n = game.board_size
