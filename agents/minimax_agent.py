@@ -30,6 +30,11 @@ def minimax(game: HexGame, depth: int, me: int) -> int:
     
 
 class MinimaxAgent:
+    depth = 2
+
+    def __init__(self, depth = 2):
+        self.depth = depth
+
     def choose_next_move(self, game: HexGame) -> tuple[int, int]:
         best_score = -INF
         best_move = None
@@ -38,7 +43,7 @@ class MinimaxAgent:
             simulation = game.copy()
             simulation.play(*move)
 
-            score = minimax(simulation, 2, game.current_player)
+            score = minimax(simulation, self.depth, game.current_player)
 
             if score > best_score:
                 best_score = score
