@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from agents.shortest_path_agent import ShortestPathAgent
+from agents.dijkstra_agent import DijkstraAgent
 from controller import Controller
 from game import HexGame
 from ui import HexUI
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     root.title("Hex")
 
     game = HexGame(BOARD_SIZE)
-    controller = Controller(game, {1: None, -1: ShortestPathAgent()})
+    controller = Controller(game, {1: None, -1: DijkstraAgent()})
     ui = HexUI(root, controller, BOARD_SIZE)
     controller.view = ui
 
