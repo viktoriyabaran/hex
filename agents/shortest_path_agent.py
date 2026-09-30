@@ -5,6 +5,28 @@ from game import HexGame, neighbors
 
 INF  = float("inf")
 
+# bridge is a cell two steps away that shares two empty neighbors
+# they're a good way to win
+
+BRIDGES = [
+    ((-2, 1), (-1, 0), (-1, 1)),
+    ((-1, 2), (-1, 1), (0, 1)),
+    ((1, 1), (0, 1), (1, 0)),
+    ((2, -1), (1, 0), (1, -1)),
+    ((1, -2), (1, -1), (0, -1)),
+    ((-1, -1), (0, -1), (-1, 0)),
+]
+
+def bridges(board, row, col, size):
+    result = []
+    for (dr, dc), (ar, ac), (br, bc) in BRIDGES:
+        nr, nc = row + dr, col + dc
+        if not (0 <= nr < size and 0 <= nc < size):
+            continue
+        if board[row + ar][col + ac] == 0 and board[row + br][col + bc] == 0:
+            result.append((nr, nc))
+    return result
+
 def distance_to_connect(game: HexGame, player: int) -> float:
     n = game.board_size
     dist = [[INF] * n for _ in range(n)]
@@ -31,7 +53,7 @@ def distance_to_connect(game: HexGame, player: int) -> float:
         if (player == 1 and row == n - 1) or (player == -1 and col == n - 1):
             return d
 
-        for nrow, ncol in neighbors(row, col, n):
+        for nrow, ncol in neighbors(row, col, n) + bridges(game.board, row, col, n):
             val = game.board[nrow][ncol]
             if val == -player:
                 continue
