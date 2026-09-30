@@ -12,7 +12,7 @@ if __name__ == "__main__":
     root.title("Hex")
 
     game = HexGame(BOARD_SIZE)
-    controller = Controller(game, {1: MCTSAgent(), -1: MCTSAgent()})
+    controller = Controller(game, {1: MCTSAgent(700), -1: MCTSAgent(900)})
     ui = HexUI(root, controller, BOARD_SIZE)
     controller.view = ui
 

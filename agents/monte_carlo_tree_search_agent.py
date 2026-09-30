@@ -1,4 +1,4 @@
-from agents.helpers.mcts_node import Node
+from agents.structures.mcts_node import Node
 from game import HexGame
 
 from .agent import IAgent
