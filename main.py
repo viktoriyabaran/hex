@@ -1,21 +1,8 @@
 import tkinter as tk
-
-from agents.monte_carlo_tree_search_agent import MCTSAgent
-from controller import Controller
-from game import HexGame
-from ui import HexUI
-
-BOARD_SIZE = 7
-
+ 
+from ui import App
+ 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.title("Hex")
-
-    game = HexGame(BOARD_SIZE)
-    controller = Controller(game, {1: MCTSAgent(5000), -1: MCTSAgent(5000)})
-    ui = HexUI(root, controller, BOARD_SIZE)
-    controller.view = ui
-
-    ui.redraw(game)
-    controller.start()
+    App(root)
     root.mainloop()
