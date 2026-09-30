@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from agents.minimax import MinimaxAgent
+from agents.alpha_beta_agent import AlphaBetaAgent
 from controller import Controller
 from game import HexGame
 from ui import HexUI
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     root.title("Hex")
 
     game = HexGame(BOARD_SIZE)
-    controller = Controller(game, {1: None, -1: MinimaxAgent()})
+    controller = Controller(game, {1: AlphaBetaAgent(3), -1: AlphaBetaAgent(4)})
     ui = HexUI(root, controller, BOARD_SIZE)
     controller.view = ui
 
