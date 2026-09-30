@@ -7,7 +7,7 @@ INF  = float("inf")
 
 def distance_to_connect(game: HexGame, player: int) -> float:
     n = game.board_size
-    dist = [[INF] * for _ in range(n)]
+    dist = [[INF] * n for _ in range(n)]
     queue = deque()
 
     start_cells = (
@@ -15,7 +15,7 @@ def distance_to_connect(game: HexGame, player: int) -> float:
     )
 
     for row, col in start_cells:
-        val = game.board_size[row][col]
+        val = game.board[row][col]
         if val != -player:
             cost = 0 if val == player else 1
             dist[row][col] = cost
@@ -28,7 +28,7 @@ def distance_to_connect(game: HexGame, player: int) -> float:
         row, col = queue.popleft()
         d = dist[row][col]
 
-        if(player == 1 and row == n - 1) or (player == -1 and col == n - 1):
+        if (player == 1 and row == n - 1) or (player == -1 and col == n - 1):
             return d
 
         for nrow, ncol in neighbors(row, col, n):
@@ -62,10 +62,10 @@ class ShortestPathAgent:
 
             score = distance_to_connect(simulation, -current_player) - distance_to_connect(simulation, current_player)
 
-            if score > best_moves:
-                best_score = [(row, col)]
+            if score > best_score:
+                best_moves = [(row, col)]
                 best_score = score
             elif score == best_score:
-                best_score.append((row, col))
+                best_moves.append((row, col))
 
         return random.choice(best_moves)
