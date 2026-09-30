@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from agents.random_agent import RandomAgent
+from agents.shortest_path_agent import ShortestPathAgent
 from controller import Controller
 from game import HexGame
 from ui import HexUI
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     root.title("Hex")
 
     game = HexGame(BOARD_SIZE)
-    controller = Controller(game, {1: None, -1: RandomAgent()})
+    controller = Controller(game, {1: None, -1: ShortestPathAgent()})
     ui = HexUI(root, controller, BOARD_SIZE)
     controller.view = ui
 

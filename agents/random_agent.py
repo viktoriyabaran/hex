@@ -1,8 +1,8 @@
 import random
 
-from .agent import IAgent
-
 from game import HexGame
+
+from .agent import IAgent
 
 
 class RandomAgent(IAgent):
