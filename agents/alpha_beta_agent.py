@@ -37,9 +37,9 @@ def minimax(game: HexGame, depth: int, me: int, alpha: int, beta: int) -> int:
 class AlphaBetaAgent:
     depth = 2
 
-    def __init__(self, depth):
+    def __init__(self, depth = 2):
         self.depth = depth
-        
+
     def choose_next_move(self, game: HexGame) -> tuple[int, int]:
         best_score = -INF
         best_move = None
